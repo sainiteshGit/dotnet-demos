@@ -1,0 +1,27 @@
+@baseUrl = http://localhost:5208
+
+### 1. Debug - Check cache type (Should show "RedisCache")
+GET {{baseUrl}}/api/products/debug
+Accept: application/json
+
+### 2. Get Product 1 - FIRST CALL (Check terminal: should show CACHE MISS)
+GET {{baseUrl}}/api/products/1
+Accept: application/json
+
+### 3. Get Product 1 - SECOND CALL (Check terminal: should show CACHE HIT)
+GET {{baseUrl}}/api/products/1
+Accept: application/json
+
+### 4. Get All Products
+GET {{baseUrl}}/api/products
+Accept: application/json
+
+### 5. Invalidate cache for Product 1
+DELETE {{baseUrl}}/api/products/cache/1
+
+### 6. Get Product 1 AFTER invalidation (Check terminal: CACHE MISS again!)
+GET {{baseUrl}}/api/products/1
+Accept: application/json
+
+### 7. Invalidate ALL cache
+DELETE {{baseUrl}}/api/products/cache
